@@ -1,0 +1,26 @@
+{
+  "name": "backbone-skeleton",
+  "version": "0.1.0",
+  "description": "Squallstar's Backbone Skeleton",
+  "main": "build/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/squallstar/backbone-skeleton.git"
+  },
+  "author": "Nicholas Valbusa",
+  "license": "GNU",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-handlebars": "~0.5.9",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-sass": "~0.3.0"
+  }
+}
