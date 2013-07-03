@@ -62,7 +62,8 @@ The environment (**development** or **release**) will be chosen automatically by
 
 ## 3. Getting started
 
-To compile the source code, you'll need npm (which comes with node.js), grunt, imagemagick and some other packages installed on the system:
+To compile the source code, you'll need npm (which comes with node.js), grunt, imagemagick and some other packages installed on the system.
+You will also need **Ruby**, just because **Sass** is a Ruby Gem.
 
     npm install -g grunt-cli
     
@@ -79,6 +80,7 @@ To compile the source code, you'll need npm (which comes with node.js), grunt, i
     brew install graphicsmagick
     npm install gm
     npm install grunt-spritesmith
+    gem install sass
 
 
 #### Build the product
