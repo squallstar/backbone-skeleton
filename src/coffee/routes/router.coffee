@@ -10,24 +10,18 @@ window.AppRouter = Backbone.Router.extend(
     '': 'home'
 
   initialize: ->
-    do @reloadHeader
-    $('body').append new LayoutView().render()
+    window.ui = new UIView().render()
+    $('body').append window.ui.el
+    $('body').append new LayoutView().render().el
 
-  reloadHeader: ->
-    html = new HeaderView().render()
-    header = $('header')
-
-    if header.length
-      header.replaceWith html
-    else
-      $('body').append html
-
-  # Authentication check  
+  # Authentication check
   checkAuth: ->
     location = window.location.hash.replace '#', ''
-
+    
     redirect_to = false
-    redirect_to = 'login' if location != 'login' && false # Adjust it to fit your needs
+
+     # Adjust this to fit your needs
+    redirect_to = 'login' if location != 'login' && false
 
     window.location.hash = redirect_to if redirect_to
     return redirect_to != false
@@ -37,5 +31,4 @@ window.AppRouter = Backbone.Router.extend(
 
   home: ->
     $('#container').html new HomeView().render().el
-
 )

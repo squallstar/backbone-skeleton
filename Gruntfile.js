@@ -20,12 +20,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-spritesmith');
   
   grunt.initConfig({
 
     clean: {
-      all: ['build'],
-      post_build: ['.sass-cache', 'npm-debug.log', 'build/js/tpl.js']
+      all: ['.sass-cache', 'build'],
+      post_build: ['.sass-cache', 'npm-debug.log', 'build/.tmp']
     },
     
     coffee: {      
@@ -34,15 +35,14 @@ module.exports = function(grunt) {
           join: true
         },
         files: {
-          'build/js/app.js': [
-            'src/coffeescript/config/*.coffee',
-            'src/coffeescript/core/*.coffee',
-            'src/coffeescript/helpers/*.coffee',
-            'src/coffeescript/models/*.coffee',
-            'src/coffeescript/routes/*.coffee',
-            'src/coffeescript/views/*.coffee',
-            'src/coffeescript/collections/*.coffee',
-            'src/coffeescript/*.coffee'
+          'build/.tmp/app.js': [
+            'src/coffee/core/*.coffee',
+            'src/coffee/helpers/*.coffee',
+            'src/coffee/models/*.coffee',
+            'src/coffee/routes/*.coffee',
+            'src/coffee/views/*.coffee',
+            'src/coffee/collections/*.coffee',
+            'src/coffee/*.coffee'
           ]
         }
       },
@@ -66,23 +66,37 @@ module.exports = function(grunt) {
       },
       js: {
         src: [
-          'build/js/app.js',
-          'build/js/tpl.js'
+          'build/.tmp/config.js',
+          'build/.tmp/app.js',
+          'build/.tmp/tpl.js'
         ],
         dest: 'build/js/app.js'
       }
     },
     
     copy: {
+      development: {
+        files: [
+          {expand: true, cwd: 'src/config/development/', src: ['config.js'], dest: 'build/.tmp/'},
+        ]
+      },
+
+      release: {
+        files: [
+          {expand: true, cwd: 'src/config/release/', src: ['config.js'], dest: 'build/.tmp/'},
+        ]
+      },
+
       build: {
         files: [
           {expand: true, cwd: 'src/', src: ['index.html'], dest: 'build/'},
-          {expand: true, cwd: 'src/libs/img/', src: ['**'], dest: 'build/libs/img/'}
+          {expand: true, cwd: 'src/libs/img/', src: ['**'], dest: 'build/libs/img/'},
+          {expand: true, cwd: 'src/img/', src: ['**'], dest: 'build/img/'}
         ]
       },
       deploy: {
         files: [
-          {expand: true, cwd: 'build/', src: ['**'], dest: '/path/to/folder/'}
+          {expand: true, cwd: 'build/', src: ['**'], dest: '/Volumes/DEV Quipper/macmini/bq/on/steroids/'}
         ]
       }
     },
@@ -96,17 +110,53 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'build/js/tpl.js': ['src/templates/**/*.hbs']
+          'build/.tmp/tpl.js': ['src/templates/**/*.hbs']
         }
       }
     },
 
     sass: {
-      build: {
+      development: {
         files: {
-          'build/css/app.css' : 'src/sass/main.scss'
+          'build/css/app.css' : [
+            'build/.tmp/sprite.css',
+            'src/sass/main.scss'
+          ]
+        },
+        options: {
+          style: 'expanded'
+        }
+      },
+      release: {
+        files: {
+          'build/css/app.css' : [
+            'build/.tmp/sprite.css',
+            'src/sass/main.scss'
+          ]
+        },
+        options: {
+          style: 'compressed'
         }
       }
+    },
+
+    sprite: {
+        build: {
+            src: ['src/sprites/*.png'],
+            destImg: 'build/img/sprite.png',
+            destCSS: 'build/.tmp/sprite.css',
+            imgPath: '../img/sprite.png',
+            algorithm: 'left-right',
+            engine: 'gm',
+            'engineOpts': {
+              'imagemagick': true
+            },
+            cssOpts: {
+              cssClass: function (item) {
+                return '.sprite-' + item.name;
+              }
+            }
+        }
     },
 
     uglify: {
@@ -130,16 +180,26 @@ module.exports = function(grunt) {
   
   grunt.registerTask('build', [
     'clean:all',
+    'sprite',
     'coffee',
+    'copy:development',
     'copy:build',
     'handlebars',
+    'sass:development',
     'concat',
-    'sass',
     'clean:post_build'
   ]);
 
   grunt.registerTask('build:release', [
-    'build',
+    'clean:all',
+    'sprite',
+    'coffee',
+    'copy:release',
+    'copy:build',
+    'handlebars',
+    'sass:release',
+    'concat',
+    'clean:post_build',
     'uglify:release'
   ]);
 

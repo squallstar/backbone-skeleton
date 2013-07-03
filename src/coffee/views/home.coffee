@@ -9,10 +9,10 @@ class window.HomeView extends Backbone.View
   tagName: "div"
 
   initialize: ->
- 
+    # Do something useful here
+
   render: ->
     @$el.html window.Tpl['home'] {
-      foo: 'Welcome!'
+      foo: 'It works!'
     }
-
     @

@@ -4,8 +4,7 @@
  * https://github.com/squallstar/backbone-skeleton
 ###
 
-$(document).ready () ->
-  window.router = new AppRouter()
-  
-  do window.router.checkAuth
-  Backbone.history.start()
+# This mimics "if x == y"
+Handlebars.registerHelper "is", (x, y, options) ->
+  return options.fn(this) if x is y
+  options.inverse this

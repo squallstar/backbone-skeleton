@@ -4,7 +4,5 @@
  * https://github.com/squallstar/backbone-skeleton
 ###
 
-window.HeaderView = Backbone.View.extend
-
-  render: ->
-    do window.Tpl['layout/header']
+window.navigate = (url) ->
+  window.router.navigate url, true
