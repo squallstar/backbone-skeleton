@@ -36,7 +36,7 @@ Source files are located here:
 
     src/sass
     
-Please note that only the **main.scss** file will be compiled, which means that every other sass file will need to be imported somewhere (like the main.scc file).
+Please note that only the **main.scss** file will be compiled, which means that every other sass file will need to be imported somewhere (like the main.scss file).
 
 ### 1.5 Images sprite
 
