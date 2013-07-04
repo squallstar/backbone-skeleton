@@ -64,9 +64,21 @@ The environment (**development** or **release**) will be chosen automatically by
 
 To compile the source code, you'll need npm (which comes with node.js), grunt, imagemagick and some other packages installed on the system.
 You will also need **Ruby**, just because **Sass** is a Ruby Gem.
-
+    
+    # Sass gem (requires ruby)
+    gem install sass
+    
+    # Install Homebrew (brew)
+    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    
+    # Install Imagemagick
+    brew install imagemagick
+    brew install graphicsmagick
+    
+    # Install Grunt
     npm install -g grunt-cli
     
+    # Grunt plugins
     npm install grunt-contrib-clean --save-dev
     npm install grunt-contrib-coffee --save-dev
     npm install grunt-contrib-concat --save-dev
@@ -75,12 +87,9 @@ You will also need **Ruby**, just because **Sass** is a Ruby Gem.
     npm install grunt-contrib-sass --save-dev
     npm install grunt-contrib-uglify --save-dev
     npm install grunt-contrib-watch --save-dev
-    
-    brew install imagemagick
-    brew install graphicsmagick
     npm install gm
     npm install grunt-spritesmith
-    gem install sass
+    
 
 
 #### Build the product
