@@ -96,7 +96,7 @@ module.exports = function(grunt) {
       },
       deploy: {
         files: [
-          {expand: true, cwd: 'build/', src: ['**'], dest: '/Volumes/DEV Quipper/macmini/bq/on/steroids/'}
+          {expand: true, cwd: 'build/', src: ['**'], dest: '<%= deployPath %>'}
         ]
       }
     },
@@ -203,8 +203,14 @@ module.exports = function(grunt) {
     'uglify:release'
   ]);
 
-  grunt.registerTask('deploy', [
-    'build:release',
-    'copy:deploy'
-  ]);
+  grunt.registerTask('deploy', 'Builds the app for release and deploys it to the provided destination path',
+    function(where) {
+      if (!where) {
+        grunt.log.writeln('Please provide the deploy path: grunt deploy:/path/to/dir');
+        return false;
+      }
+      grunt.config.set('deployPath', where);
+      grunt.task.run(['build:release', 'copy:deploy']);
+    }
+  );
 }

@@ -118,3 +118,11 @@ To build the product for release, just use
 To run the product, open the application index file in your browser:
 
     build/index.html
+
+--
+
+#### Deploy the product
+
+To build the project for release and deploy it to a folder, use this syntax:
+    
+    grunt deploy:/path/to/dir
