@@ -91,18 +91,17 @@ You will also need **Ruby**, just because **Sass** is a Ruby Gem.
     npm install grunt-spritesmith
     
 
-
 #### Build the product
     
 You can compile the sources by running
     
-    grunt build
+    $ grunt build
     
 And everything will be compiled into the **build** folder.
 
 #### Start a watch job for continuous deployment:
     
-    grunt watch
+    $ grunt watch
     
 By using the watch job, the build will be trigger automatically once you add/modify/delete a file from the **src** folder.
 
@@ -111,13 +110,13 @@ By using the watch job, the build will be trigger automatically once you add/mod
 
 To build the product for release, just use
 
-    grunt build:release
+    $ grunt build:release
 
 #### Run the product
 
 To run the product, open the application index file in your browser:
 
-    build/index.html
+    $ open build/index.html
 
 --
 
@@ -125,4 +124,62 @@ To run the product, open the application index file in your browser:
 
 To build the project for release and deploy it to a folder, use this syntax:
     
-    grunt deploy:/path/to/dir
+    $ grunt deploy:/path/to/dir
+    
+---
+
+## 4. Development
+
+#### 4.1 Boot and router
+
+The application boot file is **src/coffee/boot.coffee** and as you can see it just creates a new instance of the router and it starts it.
+The router file is **src/coffee/routes/router.coffee** and adding a new route is easy as follows:
+
+First of all, add a new line specifying the route and the method to call:
+
+    routes:
+        '': 'home'
+
+        # new route
+        foo: 'bar'
+
+Then, in the same file create the **bar** method as follows:
+
+    bar: ->
+        # Do your stuff here
+
+Within a method, you will usually create a new instance of a view, render it, and then you will add the rendered element inside the DOM **#container**:
+
+    bar: ->
+        $('#container').html new MyView().render().el
+
+---
+
+#### 4.2 Creating your controller: the view
+    
+In Backbone, a view is what usually the Controller is in a **MVC** architecture.
+
+Start by creating a **myview.coffee** file in the **src/views/** folder:
+
+    class window.MyView extends Backbone.View
+
+        initialize: -> 
+        
+        render: ->  
+            @$el.html window.Tpl['foo'] {
+                hello: 'world'
+            }
+        
+            @
+
+As you can see, the **render** method will fill up the **@$el** with the compiled template.
+
+In backbone, the **@el** element is your view container, while the **@$el** is its **jQuery** object.
+
+Remember to return the class instance at the end of the render method writing a **@** or **this** (which is the same).
+
+The **foo** handlebar template used in the above example should be placed there:
+    
+    src/templates/foo.hbs
+    
+Some helpers for handlebars have been written; you can find all of them here: **src/coffee/helpers/handlebars.hbs**
