@@ -23,5 +23,8 @@
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-sass": "~0.3.0",
     "grunt-spritesmith": "~1.5.1"
+  },
+  "dependencies": {
+    "gm": "~1.10.0"
   }
 }

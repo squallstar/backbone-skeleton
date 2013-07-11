@@ -75,20 +75,8 @@ You will also need **Ruby**, just because **Sass** is a Ruby Gem.
     brew install imagemagick
     brew install graphicsmagick
     
-    # Install Grunt
-    npm install -g grunt-cli
-    
-    # Grunt plugins
-    npm install grunt-contrib-clean --save-dev
-    npm install grunt-contrib-coffee --save-dev
-    npm install grunt-contrib-concat --save-dev
-    npm install grunt-contrib-copy --save-dev
-    npm install grunt-contrib-handlebars --save-dev
-    npm install grunt-contrib-sass --save-dev
-    npm install grunt-contrib-uglify --save-dev
-    npm install grunt-contrib-watch --save-dev
-    npm install gm
-    npm install grunt-spritesmith
+    # Install Grunt and its plugins
+    npm install .
     
 
 #### Build the product

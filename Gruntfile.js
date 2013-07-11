@@ -213,4 +213,6 @@ module.exports = function(grunt) {
       grunt.task.run(['build:release', 'copy:deploy']);
     }
   );
+
+  grunt.registerTask('default', ['build']);
 }
