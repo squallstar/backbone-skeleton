@@ -1,4 +1,4 @@
-# Backbone Skeleton App v0.2
+# Backbone Skeleton App v0.3
 
 A skeleton for your new Backbone app that provides everything you need just out-of-the-box.
 
@@ -74,8 +74,11 @@ You will also need **Ruby**, just because **Sass** is a Ruby Gem.
     # Install Imagemagick
     brew install imagemagick
     brew install graphicsmagick
+
+    # Install Grunt (system-wise)
+    npm install -g grunt-cli
     
-    # Install Grunt and its plugins
+    # Install Grunt plugins required by the app
     npm install .
     
 
