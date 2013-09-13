@@ -6,11 +6,11 @@ A skeleton for your new Backbone app that provides everything you need just out-
 
 ### 1.1 Grunt
 
-Grunt is the app compiler that takes care of everything. You'll need to install it in order to build the product.
+Grunt is a Javascript task-runner and the main compiler tool of this skeleton app. You'll need to install it in order to build the product.
 
 ### 1.2 Backbone
 
-All you scripts must be written using **Coffeescript**. The MVC can be found here:
+All your scripts must be written using **Coffeescript**. The MVC can be found here:
 
     src/coffee/
     
